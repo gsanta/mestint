@@ -1,8 +1,11 @@
+import java.util.Iterator;
+
 
 public class Word {
 	public String word = "";
 	public int negCount;
 	public int posCount;
+	public double posProb;
 	
 	public Word(String word, boolean positive) {
 		this.word = word;
@@ -33,7 +36,15 @@ public class Word {
 		return word.equals(((Word) other).word);
 	}
 	
+	public void countProb(int allPos, int allNeg) {
+		double normPos = (double) posCount / (double) allPos;
+		double normNeg = (double) negCount / (double) allNeg;
+		
+		posProb = normPos / (normPos + normNeg);
+	}
+	
 	public int hashCode() {
 		return word.hashCode();
 	}
+	
 }

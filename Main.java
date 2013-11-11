@@ -1,5 +1,6 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.util.ArrayList;
 
 public class Main {
 	
@@ -26,6 +27,7 @@ public class Main {
 					positive = false;
 				}
 				
+				statistic.increaseCommentCount(positive);
 			} else {
 				split = line.split("\\s+");
 
@@ -37,7 +39,46 @@ public class Main {
 				}
 			}
 		}
+		
 		br.close();
+		
+		System.out.println("Training done!");
+
+		br = new BufferedReader(new FileReader(testFile));
+		Comment comment = null;
+		
+		while ((line = br.readLine()) != null) {
+			split = line.split("\\t");
+			if (split.length == 2) {
+				
+				
+				if(comment != null) {
+					statistic.addComment(comment);
+				}
+				
+				comment = new Comment();
+				if (split[1].equals("POS")) {
+					comment.original = true;
+				} else {
+					comment.original = false;
+				}
+			} else {
+				split = line.split("\\s");
+
+				for (int i = 0; i < split.length; i++) {
+					
+					Word word;
+					String stringWord = split[i].toLowerCase();
+
+					// If the String is in our HashMap get the word out
+					if ((word = statistic.getWord(stringWord)) != null) {
+						comment.addWord(word);
+					} 
+				}
+
+			}
+
+		}
 	}
 }
 
