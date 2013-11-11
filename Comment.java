@@ -20,8 +20,10 @@ public class Comment {
 		
 		while (iterator.hasNext()) {
 			Word word = iterator.next();
-			wordCount += 1;
-			probSum += word.posProb;
+			if(word.posProb >= 0.7 || word.posProb <= 0.3) {
+				wordCount += 1;
+				probSum += word.posProb;
+			}
 		}
 		
 		this.posProb = probSum / (double) wordCount;

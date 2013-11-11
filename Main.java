@@ -1,6 +1,5 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.util.ArrayList;
 
 public class Main {
 	
@@ -35,7 +34,6 @@ public class Main {
 					String word = split[i].toLowerCase();
 					
 					statistic.addWord(word, positive);
-					
 				}
 			}
 		}
@@ -106,6 +104,32 @@ public class Main {
 		
 		double arany = (double) helyes / (double) (hibas + helyes);
 		System.out.println("Helyes: " + helyes + ", Hibas: " + hibas + ", Helyes arany: " + arany);
+		
+		System.out.println("csak a 0.55 feletti es a 0.45 alattiakat beveve:");
+		
+		helyes = 0;
+		hibas = 0;
+		for(Comment c: statistic.comments) {
+//			System.out.println("Poz valszin: " + c.posProb + ", eredeti: " + c.original + ", szamolt: " + c.result);
+			if(c.posProb > 0.53 || c.posProb < 0.47) {
+				if(c.original == c.result) {
+					helyes += 1;
+				} else {
+					hibas += 1;
+				}
+			} else {
+//				if(c.original == true) {
+//					helyes += 1;
+//				} else {
+//					hibas += 1;
+//				}
+			}
+		}
+		
+		arany = (double) helyes / (double) (hibas + helyes);
+		System.out.println("Helyes: " + helyes + ", Hibas: " + hibas + ", Helyes arany: " + arany);
+		
+		
 	}
 }
 

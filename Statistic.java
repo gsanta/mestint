@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 
 
@@ -8,7 +9,6 @@ public class Statistic {
 	public ArrayList<Comment> comments = new ArrayList<Comment>();
 	public int posCommentCount;
 	public int negCommentCount;
-	
 	
 	public boolean addWord(String word, boolean positive) {
 		
