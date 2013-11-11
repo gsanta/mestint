@@ -4,10 +4,10 @@ import java.util.Iterator;
 
 
 public class Statistic {
-	private HashMap<String,Word> words = new HashMap<String,Word>();
-	private ArrayList<Comment> comments = new ArrayList<Comment>();
-	private int posCommentCount;
-	private int negCommentCount;
+	public HashMap<String,Word> words = new HashMap<String,Word>();
+	public ArrayList<Comment> comments = new ArrayList<Comment>();
+	public int posCommentCount;
+	public int negCommentCount;
 	
 	
 	public boolean addWord(String word, boolean positive) {

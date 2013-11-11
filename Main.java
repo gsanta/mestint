@@ -8,10 +8,10 @@ public class Main {
 	public static void main(String[] args) throws Exception{
 		Statistic statistic = new Statistic();
 		
-		String trainingFile = args[0];
-		String testFile = args[1];
+		String trainingFile = "train.txt";//args[0];
+		String testFile = "dev.txt";//args[1];
 		
-		BufferedReader br = new BufferedReader(new FileReader(testFile));
+		BufferedReader br = new BufferedReader(new FileReader(trainingFile));
 		
 		String line;
 		String[] split;
@@ -42,15 +42,21 @@ public class Main {
 		
 		br.close();
 		
+		statistic.countProbForWords();
+		
 		System.out.println("Training done!");
+		System.out.println("Pos: " + statistic.posCommentCount + ", Neg: " + statistic.negCommentCount);
+		System.out.println("Osszes szavak szama: " + statistic.words.keySet().size());
 
 		br = new BufferedReader(new FileReader(testFile));
 		Comment comment = null;
 		
+		int testCounter = 0;
+		
 		while ((line = br.readLine()) != null) {
 			split = line.split("\\t");
 			if (split.length == 2) {
-				
+//				testCounter++;
 				
 				if(comment != null) {
 					statistic.addComment(comment);
@@ -62,6 +68,10 @@ public class Main {
 				} else {
 					comment.original = false;
 				}
+				
+//				if(testCounter == 10) {
+//					break;
+//				}
 			} else {
 				split = line.split("\\s");
 
@@ -79,6 +89,23 @@ public class Main {
 			}
 
 		}
+		
+		System.out.println("Eles kommentek szama: " + statistic.comments.size());
+		System.out.println("Program vege!");
+		
+		int helyes = 0;
+		int hibas = 0;
+		for(Comment c: statistic.comments) {
+//			System.out.println("Poz valszin: " + c.posProb + ", eredeti: " + c.original + ", szamolt: " + c.result);
+			if(c.original == c.result) {
+				helyes += 1;
+			} else {
+				hibas += 1;
+			}
+		}
+		
+		double arany = (double) helyes / (double) (hibas + helyes);
+		System.out.println("Helyes: " + helyes + ", Hibas: " + hibas + ", Helyes arany: " + arany);
 	}
 }
 

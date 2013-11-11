@@ -14,6 +14,7 @@ public class Comment {
 	
 	public void countProb() {
 		Iterator<Word> iterator = words.iterator();
+
 		int wordCount = 1;
 		double probSum = 0.5;
 		
