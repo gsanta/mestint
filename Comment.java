@@ -1,17 +1,54 @@
 import java.util.ArrayList;
 import java.util.Iterator;
 
-
+/**
+ * Komment osztály, ami a kommenteket tartalmazza szavakként felbontva.
+ * Miután a szavak fel lettek töltve, futtatni kell a countProb() metódust,
+ * ami kiszámolja a komment jósági valószínűségét (0% - 100%).
+ * @author sagtabt.sze
+ *
+ */
 public class Comment {
+	/**
+	 * A komment szavai
+	 */
 	private ArrayList<Word> words = new ArrayList<Word>();
+	
+	public ArrayList<String> newWords = new ArrayList<String>();
+	/**
+	 * A jósági valszín
+	 */
 	public double posProb;
+	/**
+	 * tesztelésre, az komment valódi jósága
+	 */
 	public boolean original;
+	/**
+	 * A jósági valszín alapján számított eredmény (true == pos, false == neg)
+	 */
 	public boolean result;
 	
+	public String code;
+	
+	public boolean setPrev = false;
+	
+	/**
+	 * szó hozzáadása
+	 * @param word
+	 */
 	public void addWord(Word word) {
 		words.add(word);
 	}
 	
+	public void addNewWord(String word) {
+		newWords.add(word);
+	}
+	
+	/**
+	 * valszín kiszámítása
+	 * végigmegy a szavakon, összeadja a valszíneket,
+	 * majd leosztja a szavak számával.
+	 */
 	public void countProb() {
 		Iterator<Word> iterator = words.iterator();
 
@@ -20,8 +57,9 @@ public class Comment {
 		
 		while (iterator.hasNext()) {
 			Word word = iterator.next();
-			if(word.posProb >= 0.7 || word.posProb <= 0.3) {
+			if(word.posProb >= 0.6 || word.posProb <= 0.4) {
 				wordCount += 1;
+				
 				probSum += word.posProb;
 			}
 		}
