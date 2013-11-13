@@ -21,10 +21,12 @@ public class Word {
 	 */
 	public int posCount;
 	/**
-	 * A számított jósági valszín
+	 * A számított pos jósági valszín
 	 */
 	public double posProb;
-	
+	/**
+	 * A számított neg jósági valszín
+	 */
 	public double negProb;
 	
 	/**
@@ -74,7 +76,6 @@ public class Word {
 	
 	/**
 	 * Miután lefutott a train, jósági valszín számítása.
-	 * Az elején normalizál, mert lehet hogy a pos és neg kommentek száma nem egyenlő
 	 * @param allPos
 	 * @param allNeg
 	 */
@@ -84,6 +85,10 @@ public class Word {
 //		
 //		posProb = normPos / (normPos + normNeg);
 		
+		/**
+		 * A pos valszinje, a konstans szamok az orai pelda alapjan
+		 * A vegen az osztas normalizalja, mert a train-ben nem egyenlo a pos es a neg kommentek szama
+		 */
 		posProb = (((double) posCount + 3.0 * 0.5) / ((double) (posCount + negCount) + 3.0)) / (4000.0 / 6000.0);
 	
 		negProb = (((double) negCount + 3.0 * 0.5) / ((double) (posCount + negCount) + 3.0)) / (2000.0 / 6000.0);

@@ -14,6 +14,9 @@ public class Comment {
 	 */
 	private ArrayList<Word> words = new ArrayList<Word>();
 	
+	/**
+	 * Azoka  szavak amik nem a tanulaskor, hanem utana vannak hozzaadva
+	 */
 	public ArrayList<String> newWords = new ArrayList<String>();
 	/**
 	 * A jósági valszín
@@ -31,8 +34,15 @@ public class Comment {
 	 */
 	public boolean result;
 	
+	/**
+	 * A komment kodja
+	 */
 	public String code;
 	
+	
+	/**
+	 * mar be van-e allitva a josagi ertek (result)
+	 */
 	public boolean setPrev = false;
 	
 	/**
@@ -43,20 +53,24 @@ public class Comment {
 		words.add(word);
 	}
 	
+	/**
+	 * tanulas utan szo hozzaadasa
+	 * @param word
+	 */
 	public void addNewWord(String word) {
 		newWords.add(word);
 	}
 	
 	/**
-	 * valszín kiszámítása
-	 * végigmegy a szavakon, összeadja a valszíneket,
-	 * majd leosztja a szavak számával.
+	 * Valszin szamitasa, vegigmegy a komment szavain,
+	 * szorozza a a pos illetve neg valszineket kulon-kulon,
+	 * amelyik a nagyobb, az nyer
 	 */
 	public void countProb() {
 		Iterator<Word> iterator = words.iterator();
 
-		int wordCount = 1;
-		double probSum = 0.5;
+//		int wordCount = 1;
+//		double probSum = 0.5;
 		
 		
 		while (iterator.hasNext()) {

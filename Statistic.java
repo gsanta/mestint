@@ -24,9 +24,13 @@ public class Statistic {
 	 */
 	public ArrayList<Comment> comments = new ArrayList<Comment>();
 	/**
-	 * 
+	 * positiv kommentek szama
 	 */
 	public int posCommentCount;
+	
+	/**
+	 * negativ kommentek szama
+	 */
 	public int negCommentCount;
 	
 	/**
@@ -71,6 +75,9 @@ public class Statistic {
 		comment.countProb();
 		comments.add(comment);
 		///////////////////////////
+		/**
+		 * A commentben levo meg eddig nem vizsgalt szavak bevetele tovabbi tanulas celjabol
+		 */
 		for(String w : comment.newWords) {
 			if(newWords.containsKey(w)) {
 				newWords.get(w).increaseNum(comment.result);
@@ -84,6 +91,10 @@ public class Statistic {
 		
 	}
 	
+	/**
+	 * hozzaadja, de nem szamol valszint
+	 * @param comment
+	 */
 	public void addWithoutCountProb(Comment comment) {
 		comments.add(comment);
 	}
