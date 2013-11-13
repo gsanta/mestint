@@ -25,6 +25,8 @@ public class Word {
 	 */
 	public double posProb;
 	
+	public double negProb;
+	
 	/**
 	 * Szó első előfordulásakor, maga a szó megadása a konstruktornak, illetve, hogy épp neg vagy poz komment-e.
 	 * @param word
@@ -77,10 +79,17 @@ public class Word {
 	 * @param allNeg
 	 */
 	public void countProb(int allPos, int allNeg) {
-		double normPos = (double) posCount / (double) allPos;
-		double normNeg = (double) negCount / (double) allNeg;
+//		double normPos = (double) posCount / (double) allPos;
+//		double normNeg = (double) negCount / (double) allNeg;
+//		
+//		posProb = normPos / (normPos + normNeg);
 		
-		posProb = normPos / (normPos + normNeg);
+		posProb = (((double) posCount + 3.0 * 0.5) / ((double) (posCount + negCount) + 3.0)) / (4000.0 / 6000.0);
+	
+		negProb = (((double) negCount + 3.0 * 0.5) / ((double) (posCount + negCount) + 3.0)) / (2000.0 / 6000.0);
+		
+		
+		//System.out.println(posProb);
 	}
 	
 	/**

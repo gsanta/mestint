@@ -18,7 +18,10 @@ public class Comment {
 	/**
 	 * A jósági valszín
 	 */
-	public double posProb;
+	public double posProb = 1;//4000.0 / (4000.0 + 2000.0) ;
+	
+	public double negProb = 1;//2000.0 / (4000.0 + 2000.0);
+	
 	/**
 	 * tesztelésre, az komment valódi jósága
 	 */
@@ -55,18 +58,31 @@ public class Comment {
 		int wordCount = 1;
 		double probSum = 0.5;
 		
+		
 		while (iterator.hasNext()) {
 			Word word = iterator.next();
-			if(word.posProb >= 0.6 || word.posProb <= 0.4) {
-				wordCount += 1;
-				
-				probSum += word.posProb;
-			}
+//			if(word.posProb >= 0.6 || word.posProb <= 0.4) {
+//				wordCount += 1;
+//				
+//				probSum += word.posProb;
+				if(word.posProb != 0) {
+					posProb *= word.posProb;
+				}
+				if(word.negProb != 0) {
+					negProb *= word.negProb;
+				}
+//			}
 		}
 		
-		this.posProb = probSum / (double) wordCount;
-		
-		if(this.posProb >= 0.5) {
+//		this.posProb = probSum / (double) wordCount;
+//		
+//		if(this.posProb >= 0.5) {
+//			result = true;
+//		} else {
+//			result = false;
+//		}
+//		System.out.println(posProb);
+		if(posProb > negProb) {
 			result = true;
 		} else {
 			result = false;

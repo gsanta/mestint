@@ -170,6 +170,7 @@ public class Main {
 		
 		int helyes = 0;
 		int hibas = 0;
+		int neg = 0;
 		for(Comment c: statistic.comments) {
 //			System.out.println("Poz valszin: " + c.posProb + ", eredeti: " + c.original + ", szamolt: " + c.result);
 			if(c.original == c.result) {
@@ -179,10 +180,15 @@ public class Main {
 				
 				System.out.println(c.code + " " + c.posProb);
 			}
+			
+			if(c.result == false) {
+				neg++;
+			}
 		}
 		
 		double arany = (double) helyes / (double) (hibas + helyes);
 		System.out.println("Helyes: " + helyes + ", Hibas: " + hibas + ", Helyes arany: " + arany);
+		System.out.println("neg: " + neg);
 //		
 //		System.out.println("csak a 0.55 feletti es a 0.45 alattiakat beveve:");
 //		
